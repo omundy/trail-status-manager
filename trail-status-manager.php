@@ -55,10 +55,13 @@ class Trail_Status_Mgr
      */
     public function add_meta_flag()
     {
+		$user = wp_get_current_user();
+		// print_r($user->roles);
+
         if (current_user_can('editor') || current_user_can('administrator')) {
             // administrators or editors
             print '<meta name="trail-manager" content="false">';
-        } else {
+        } else if ($user->roles[0] == "trailmanager"){
             print '<meta name="trail-manager" content="true">';
         }
     }
